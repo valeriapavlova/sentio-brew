@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block content %}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__intro">
+    {{ m.title_group('Suscripción de café de especialidad e infusiones', 'Un blend para cada momento del día', 'h1', 't-h1', 'muted', 'hero-title') }}
+    <div class="hero__aside">
+      <p class="t-lead muted">Foco por la mañana, energía a mediodía y calma por la noche. Un test de 2 minutos ajusta tu caja a cómo te sientes cada mes.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--solid" href="test/">Haz el test · 2 min →</a>
+        <a class="btn btn--outline" href="suscripcion/#planes">Caja Degustación 19 €</a>
+      </div>
+      <ul class="hero__facts" role="list"><li>3 blends por momento</li><li>Sin permanencia</li><li>Envío incluido</li></ul>
+    </div>
+  </div>
+  <div class="hero__stage">
+    <img src="assets/img/hero-caja.webp" alt="Caja de Sentio Brew abierta con la tarjeta del mes y las bolsas Focus, Euphoria y Serenity" width="2000" height="1546" fetchpriority="high">
+  </div>
+</section>
+
+<section class="section" id="blends" aria-labelledby="blends-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="t-h2" id="blends-title">Tu día en tres momentos</h2>
+      <p class="t-body muted">Cada blend tiene su hora. Buscas lo que necesitas (concentrarte, recargar, dormir) y el blend responde.</p>
+    </div>
+    <div class="grid-3">
+      {% for k in blend_order %}{{ m.blend_card(blends[k]) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--subtle" id="como-funciona" aria-labelledby="how-title">
+  <div class="container how">
+    <div class="how__text">
+      {{ m.title_group('Cómo funciona', 'Empieza por cómo te sientes', 'h2', 't-h2', 'muted', 'how-title') }}
+      <p class="t-body muted">Sin dispositivos ni datos biométricos: solo un test corto sobre tu energía, tu estrés y tu descanso.</p>
+      <ol class="steps" role="list">
+        {{ m.step(1, 'Haz el test de bienestar', '2 minutos, 8 preguntas.') }}
+        {{ m.step(2, 'Recibe tu caja', 'Los tres blends con la cantidad de cada uno ajustada a tu resultado.') }}
+        {{ m.step(3, 'Repite cada mes', '¿Cambió tu ritmo? El test vuelve a ajustar la caja. Cancela cuando quieras.') }}
+      </ol>
+    </div>
+    {{ m.test_preview(blends, blend_order) }}
+  </div>
+</section>
+
+<section class="section" aria-labelledby="plans-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="t-h2" id="plans-title">Elige cómo empezar</h2>
+      <p class="t-body muted">Todas las cajas incluyen el test y el envío. Sin permanencia.</p>
+    </div>
+    <div class="grid-3" style="gap:24px">
+      {% for p in plans %}{{ m.plan_card(p) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight-top" aria-labelledby="gift-title">
+  <div class="container gift">
+    <div class="gift__media"><img src="assets/img/caja-cerrada.webp" alt="Caja cerrada de Sentio Brew para regalo" width="1000" height="1242" loading="lazy"></div>
+    <div class="gift__text">
+      {{ m.title_group('Pack Regalo · Navidad', 'Regala tres meses de pausas', 'h2', 't-h2', 'muted', 'gift-title') }}
+      <p class="t-body muted">Una caja al mes con los tres blends y una tarjeta con el ritual de cada momento. Quien la recibe hace el test y la caja se ajusta a su ritmo.</p>
+      {{ m.pills(['99 € · 3 meses', 'Pide antes del 18 de diciembre', 'Envío incluido']) }}
+      <a class="btn btn--solid" href="pack-regalo/">Regálalo →</a>
+    </div>
+  </div>
+</section>
+
+<section class="carousel-section" aria-labelledby="blog-title" data-carousel>
+  <div class="container carousel-head">
+    <div class="title-group">
+      <h2 class="t-h2" id="blog-title">Del blog</h2>
+      <p class="t-body muted">Lo que hay detrás de cada taza, sin promesas milagro.</p>
+    </div>
+    <div class="carousel-controls">
+      <a class="t-strong" href="blog/">Ver todos los artículos →</a>
+      <div class="carousel-arrows">
+        <button class="arrow-btn" type="button" data-carousel-prev aria-label="Artículos anteriores">←</button>
+        <button class="arrow-btn" type="button" data-carousel-next aria-label="Más artículos">→</button>
+      </div>
+    </div>
+  </div>
+  <div class="carousel-track" data-carousel-track tabindex="0" aria-label="Artículos del blog">
+    {% for p in posts[:5] %}{{ m.post_card(p) }}{% endfor %}
+  </div>
+</section>
+{% endblock %}

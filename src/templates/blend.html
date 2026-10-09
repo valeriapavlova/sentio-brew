@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block content %}
+{% set b = blend %}{% set d = page %}
+<section class="page-hero is-{{ b.key }}" aria-labelledby="page-title">
+  <div class="container page-hero__grid">
+    <div class="page-hero__text">
+      {{ m.breadcrumb([('Inicio', ''), ('Blends', '#blends'), (b.page_name, None)]) }}
+      {{ m.title_group(d.eyebrow, d.h1, 'h1', 't-h1-page', 'muted', 'page-title') }}
+      <p class="t-lead">{{ d.lead }}</p>
+      {{ m.pills(d.pills) }}
+      <div class="page-hero__ctas">
+        <a class="btn btn--solid" href="{{ base }}suscripcion/#planes">Pide tu Caja Degustación · 19 € →</a>
+        <a class="btn btn--outline" href="{{ base }}test/">Haz el test · 2 min</a>
+      </div>
+    </div>
+    <div class="page-hero__media page-hero__media--pouch">
+      <span class="aura aura--{{ b.key }}" style="width:70%;height:50%;left:15%;bottom:5%;opacity:.35"></span>
+      <img src="{{ base }}assets/img/{{ b.img }}" alt="Bolsa de {{ b.name }} · {{ b.ingredients }}" width="800" height="1256" fetchpriority="high">
+    </div>
+  </div>
+</section>
+
+<section class="section is-{{ b.key }}" aria-labelledby="what-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="t-h2" id="what-title">{{ d.what_title }}</h2>
+      <p class="t-body muted">{{ d.what_text }}</p>
+    </div>
+    <div class="tiles">
+      {% for t in d.tiles %}
+      <article class="tile" style="--strip: {{ t.strip }}">
+        <div class="tile__content">
+          <div class="tile__fig"><p class="t-time">{{ t.fig }}</p><h3 class="t-card-title">{{ t.name }}</h3></div>
+          <p class="t-body muted">{{ t.text }}</p>
+        </div>
+        {% if t.link[1] %}<a class="t-strong" href="{{ base if not t.link[1].startswith('#') else '' }}{{ t.link[1] }}">{{ t.link[0] }}</a>{% else %}<span class="t-small muted">{{ t.link[0] }}</span>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--subtle is-{{ b.key }}" id="ritual" aria-labelledby="ritual-title">
+  <div class="container ritual">
+    <div class="ritual-card">
+      <span class="aura aura--{{ b.key }}"></span>
+      <div class="ritual-card__content">
+        <p class="t-clock">{{ b.time }}</p>
+        <p class="t-eyebrow">{{ d.ritual.eyebrow_card }}</p>
+        <p class="t-lead">«{{ b.tagline }}»</p>
+      </div>
+      <dl>
+        {% for k, v in d.ritual.rows %}<div><dt>{{ k }}</dt><dd class="t-strong">{{ v }}</dd></div>{% endfor %}
+      </dl>
+    </div>
+    <div class="ritual__text">
+      {{ m.title_group('Cómo prepararla', d.ritual.title, 'h2', 't-h2', 'muted', 'ritual-title') }}
+      <p class="t-body muted">{{ d.ritual.text }}</p>
+      <ol class="steps" role="list">
+        {% for t, s in d.ritual.steps %}{{ m.step(loop.index, t, s) }}{% endfor %}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section is-{{ b.key }}" aria-labelledby="prec-title">
+  <div class="container precautions">
+    <div class="precautions__intro">
+      {{ m.title_group('Transparencia', d.prec.title, 'h2', 't-h2', 'muted', 'prec-title') }}
+      <p class="t-body muted">{{ d.prec.intro }}</p>
+    </div>
+    <article class="label-card" aria-label="Etiqueta de {{ b.name }}">
+      <div class="label-card__head">
+        <div class="stack" style="gap:4px"><h3 class="t-h3">{{ b.num }} · {{ b.name }}</h3><p class="t-small muted">{{ d.prec.label_sub }}</p></div>
+        <span class="logo" aria-hidden="true">SENTIO <img src="{{ base }}assets/img/logo-mark.webp" alt="" width="14" height="14"> BREW</span>
+      </div>
+      <div class="label-card__rule"></div>
+      <div class="label-card__row"><p class="t-eyebrow muted">Ingredientes</p><p class="t-body">{{ d.prec.ingredients }}</p></div>
+      <div class="label-card__row"><p class="t-eyebrow muted">Preparación</p>
+        <div class="prep">{% for v, l in d.prec.prep %}<div><strong>{{ v }}</strong><span class="t-small muted">{{ l }}</span></div>{% endfor %}</div>
+      </div>
+      <div class="label-card__row"><p class="t-eyebrow muted">Advertencias</p>
+        <ul class="warnings">{% for w in d.prec.warnings %}<li class="t-body">{{ w }}</li>{% endfor %}</ul>
+      </div>
+      <div class="label-card__row"><p class="t-eyebrow muted">Conservación</p><p class="t-body">Lugar fresco y seco, lejos de la luz. Cerrar bien tras cada uso.</p></div>
+      <div class="label-card__foot"><p class="t-strong">{{ d.prec.foot_strong }}</p><p class="t-small muted">{{ d.prec.foot_small|safe }}</p></div>
+    </article>
+  </div>
+</section>
+
+<section class="section section--tight-top" aria-labelledby="plans-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="t-h2" id="plans-title">{{ d.plans_title }}</h2>
+      <p class="t-body muted">{{ d.plans_text }}</p>
+    </div>
+    <div class="grid-3" style="gap:24px">{% for p in plans %}{{ m.plan_card(p) }}{% endfor %}</div>
+  </div>
+</section>
+
+{{ m.cta_test(blends, blend_order, d.cta_eyebrow, b.key) }}
+
+<section class="section" aria-label="Preguntas frecuentes" style="padding-top:96px">
+  <div class="container">{{ m.faq('FAQ', 'Preguntas frecuentes', d.faqs, d.faq_link) }}</div>
+</section>
+
+<section class="section section--subtle" aria-labelledby="others-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="t-h2" id="others-title">El resto de tu día</h2>
+      <p class="t-body muted">{{ d.others_text }}</p>
+    </div>
+    <div class="grid-2">{% for k in blend_order if k != b.key %}{{ m.blend_card(blends[k]) }}{% endfor %}</div>
+  </div>
+</section>
+{% endblock %}

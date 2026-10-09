@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block content %}
+<section class="page-hero--simple" style="padding-bottom:56px" aria-labelledby="page-title">
+  <div class="container">
+    {{ m.breadcrumb([('Inicio', ''), ('Suscripción', None)]) }}
+    <div class="page-hero__head">
+      {{ m.title_group('Suscripción', 'Elige tu caja', 'h1', 't-h1-page', 'muted', 'page-title') }}
+      <p class="t-lead">Todas las cajas llevan los tres blends, ajustados con tu test. Sin permanencia: pausa o cancela cuando quieras.</p>
+    </div>
+    <div class="card your-result">
+      <div>
+        <p class="t-eyebrow muted" data-sub-result-label>Tu resultado del test</p>
+        <ul class="your-result__blends" data-sub-result>
+          <li><span class="dot dot--focus"></span><span data-g="focus">Focus 250 g</span></li>
+          <li><span class="dot dot--euphoria"></span><span data-g="euphoria">Euphoria 100 g</span></li>
+          <li><span class="dot dot--serenity"></span><span data-g="serenity">Serenity 100 g</span></li>
+        </ul>
+      </div>
+      <a class="btn btn--outline btn--s" href="{{ base }}test/" data-sub-edit>Editar respuestas</a>
+    </div>
+  </div>
+</section>
+
+<section id="planes" aria-labelledby="plans-title" style="padding-bottom:96px">
+  <form class="container stack" style="gap:32px" data-sub-form>
+    {{ m.title_group('Paso 1', 'Tu caja', 'h2', 't-h2', 'muted', 'plans-title') }}
+    <div class="grid-3" style="gap:24px" role="radiogroup" aria-labelledby="plans-title">
+      {% for p in plans %}{{ m.plan_card(p, True, loop.first) }}{% endfor %}
+    </div>
+    <div class="stack" style="gap:12px" data-after>
+      <p class="t-strong" id="after-label">Después del primer mes</p>
+      <div class="segmented" role="group" aria-labelledby="after-label">
+        <button type="button" aria-pressed="true" data-after-option="ritual">Sigo con la Caja Ritual · 36 €/mes</button>
+        <button type="button" aria-pressed="false" data-after-option="none">Solo la Degustación</button>
+      </div>
+      <p class="t-small muted">Te avisamos por email 5 días antes de cada envío. Puedes pausar o cancelar hasta el día 25.</p>
+    </div>
+  </form>
+</section>
+
+<section aria-label="Contenido de la caja y pedido" style="padding-bottom:120px">
+  <div class="container sub-layout">
+    <div class="stack" style="gap:96px">
+      <div class="box-content">
+        <div class="box-content__photo"><img src="{{ base }}assets/img/caja-abierta.webp" alt="Caja abierta con la tarjeta del mes y las tres bolsas" width="1200" height="1490" loading="lazy"></div>
+        <div class="stack" style="gap:24px">
+          {{ m.title_group('Paso 2', 'Qué hay en la caja', 'h2', 't-h2') }}
+          <ul class="check-list">
+            <li><strong class="t-strong">3 blends</strong><span class="t-body muted">Focus, Euphoria y Serenity en las cantidades de tu test.</span></li>
+            <li><strong class="t-strong">Tarjeta de ritual</strong><span class="t-body muted">Tu día en 08:00 · 13:00 · 21:00, con dosis y temperatura.</span></li>
+            <li><strong class="t-strong">Test cada mes</strong><span class="t-body muted">2 minutos para ajustar la siguiente caja.</span></li>
+            <li><strong class="t-strong">Envío incluido</strong><span class="t-body muted">Llega en 48–72 h en un paquete que cabe en el buzón.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="stack" style="gap:32px">
+        {{ m.title_group('Sin permanencia', 'Cómo funciona la suscripción', 'h2', 't-h2') }}
+        <ol class="steps steps--grid" role="list">
+          {{ m.step(1, 'Haces el test', '2 minutos, sin datos biométricos.') }}
+          {{ m.step(2, 'Recibes tu caja', 'Enviamos entre el 1 y el 5 de cada mes.') }}
+          {{ m.step(3, 'Repites el test', 'Ajustamos las cantidades si cambia tu ritmo.') }}
+          {{ m.step(4, 'Pausa o cancela', 'Desde tu cuenta, sin llamadas ni permanencia.') }}
+        </ol>
+      </div>
+    </div>
+    <aside class="order" aria-labelledby="order-title" data-order>
+      {{ m.title_group('Tu pedido', 'Caja Degustación', 'h2', 't-card-title', 'muted', 'order-title') }}
+      <dl>
+        <div><dt data-order-line>Caja Degustación · 3 × 50 g</dt><dd data-order-line-price>19,00 €</dd></div>
+        <div><dt>Envío</dt><dd>Gratis</dd></div>
+        <div data-order-after-row><dt>Después</dt><dd data-order-after>Caja Ritual · 36 €/mes</dd></div>
+      </dl>
+      <div class="order__total"><span class="t-strong">Total hoy</span><span class="t-price" data-order-total>19 €</span></div>
+      <button class="btn btn--solid btn--block" type="button" data-pay>Continuar al pago →</button>
+      <p class="form-note" data-pay-note hidden role="status">Este es un proyecto académico: aquí terminaría el pedido, pero no se realiza ningún pago.</p>
+      <p class="t-small muted">Sin permanencia · Envío incluido · Cancela hasta el día 25</p>
+      <p class="t-small muted">Proyecto académico: no se realiza ningún pago.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="section section--tight-top" aria-label="Preguntas frecuentes">
+  <div class="container">{{ m.faq('FAQ', 'Sobre la suscripción', [
+    ('¿Cuándo llega mi caja?', 'La primera sale en 48–72 h desde el pedido. Después, enviamos entre el 1 y el 5 de cada mes.'),
+    ('¿Puedo pausar la suscripción?', 'Sí. Desde tu cuenta puedes saltarte un mes o pausarla hasta el día 25; el mes siguiente no se envía ni se cobra.'),
+    ('¿Cómo cancelo?', 'Desde tu cuenta, con un clic y sin llamadas. Si cancelas antes del día 25, no se envía la caja del mes siguiente.'),
+    ('¿Qué pasa si cambia mi test?', 'Ajustamos las cantidades de la siguiente caja. Los 450 g se reparten de nuevo entre Focus, Euphoria y Serenity según tu resultado.')
+  ]) }}</div>
+</section>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block content %}
+<div data-quiz>
+  <!-- Intro -->
+  <section class="test-intro" data-step="intro" aria-labelledby="test-title">
+    <div class="container test-intro__grid">
+      <div class="stack" style="gap:32px">
+        {{ m.title_group('Test de bienestar', '¿Cómo quieres sentirte hoy?', 'h1', 't-h1-page', 'muted', 'test-title') }}
+        <p class="t-lead">Ocho preguntas sobre tu día: cuándo empiezas, cuándo te cuesta concentrarte y cómo desconectas. Con tus respuestas ajustamos los tres blends de tu caja.</p>
+        {{ m.pills(['2 minutos', '8 preguntas', 'Sin datos biométricos']) }}
+        <div class="form-actions" style="gap:16px">
+          <button class="btn btn--solid" type="button" data-quiz-start>Empezar el test →</button>
+          <p class="t-small muted">Sin registro. Al final eliges si quieres la caja.</p>
+        </div>
+      </div>
+      <div class="trio">
+        <span class="aura aura--focus" style="left:2%;top:20%"></span>
+        <span class="aura aura--euphoria" style="left:30%;bottom:8%"></span>
+        <span class="aura aura--serenity" style="right:2%;top:30%"></span>
+        <img src="{{ base }}assets/img/pouch-focus.webp" alt="Focus" width="800" height="1256">
+        <img src="{{ base }}assets/img/pouch-euphoria.webp" alt="Euphoria" width="800" height="1256">
+        <img src="{{ base }}assets/img/pouch-serenity.webp" alt="Serenity" width="800" height="1256">
+      </div>
+    </div>
+  </section>
+
+  <!-- Preguntas -->
+  <form class="quiz" data-quiz-form hidden novalidate>
+    <div class="container">
+      {% for q in questions %}{% set qn = loop.index %}
+      <div class="quiz__col" data-step="q{{ qn }}" hidden>
+        <div class="progress">
+          <div class="progress__row"><p class="t-eyebrow muted">Pregunta {{ loop.index }} de 8</p><p class="t-small muted">{{ q.time }}</p></div>
+          <div class="progress__bar" aria-hidden="true">{% for i in range(8) %}<span{% if i < qn %} class="is-done"{% endif %}></span>{% endfor %}</div>
+        </div>
+        <div class="stack" style="gap:16px">
+          {{ m.title_group(q.cat, q.q, 'h2', 't-h2', 'muted') }}
+          <p class="t-body muted">{{ q.hint }}</p>
+        </div>
+        <fieldset class="options">
+          <legend class="visually-hidden">{{ q.q }}</legend>
+          {% set qi = qn %}
+          {% for label, desc, score in q.options %}
+          <label class="option">
+            <input type="radio" name="q{{ qi }}" value="{{ loop.index0 }}" data-score='{{ score|tojson }}'>
+            <span class="option__text"><span class="t-strong">{{ label }}</span><span class="t-small muted">{{ desc }}</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          {% endfor %}
+        </fieldset>
+        <div class="quiz__nav">
+          <button class="btn btn--outline" type="button" data-quiz-back>← Atrás</button>
+          <button class="btn btn--solid" type="button" data-quiz-next disabled>Siguiente →</button>
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="quiz__col" data-step="q8" hidden>
+        <div class="progress">
+          <div class="progress__row"><p class="t-eyebrow muted">Pregunta 8 de 8</p><p class="t-small muted">{{ last.time }}</p></div>
+          <div class="progress__bar" aria-hidden="true">{% for i in range(8) %}<span class="is-done"></span>{% endfor %}</div>
+        </div>
+        <div class="stack" style="gap:16px">
+          {{ m.title_group(last.cat, last.q, 'h2', 't-h2', 'muted') }}
+          <p class="t-body muted">{{ last.hint }}</p>
+        </div>
+        <fieldset class="options">
+          <legend class="visually-hidden">{{ last.q }}</legend>
+          {% for value, label in last.options %}
+          <label class="option">
+            <input type="checkbox" name="q8" value="{{ value }}">
+            <span class="option__text"><span class="t-strong">{{ label }}</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          {% endfor %}
+        </fieldset>
+        <div class="quiz__notice" data-quiz-notice hidden aria-live="polite">
+          <p class="t-strong" data-quiz-notice-title></p>
+          <p class="t-small muted">Focus y Euphoria llevan cafeína: te diremos que los tomes antes de las 14:00 y las 17:00. Serenity no lleva teína. Si marcas embarazo o medicación, no incluimos Serenity (ashwagandha y valeriana).</p>
+        </div>
+        <div class="quiz__nav">
+          <button class="btn btn--outline" type="button" data-quiz-back>← Atrás</button>
+          <button class="btn btn--solid" type="submit" data-quiz-next disabled>Ver mi resultado →</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Resultado -->
+  <section class="container result" data-step="result" hidden aria-labelledby="result-title" tabindex="-1">
+    <div class="result__head">
+      {{ m.title_group('Tu resultado', 'Tu caja de noviembre', 'h1', 't-h1-page', 'muted', 'result-title') }}
+      <p class="t-lead" data-result-summary>Tu día pide más foco por la mañana y una pausa sin cafeína por la noche. Así reparte tu caja los tres blends.</p>
+    </div>
+    <div class="result__grid">
+      <div class="result__day">
+        <div>
+          {% for k in blend_order %}{% set b = blends[k] %}
+          <div class="result-row is-{{ k }}" data-result-row="{{ k }}">
+            <p class="t-time">{{ b.time }}</p>
+            <div class="result-row__blend">
+              <p class="result-row__name"><span class="t-card-title">{{ b.name }}</span> <span class="t-strong" data-grams>150 g</span></p>
+              <div class="meter" aria-hidden="true"><span data-meter style="width:50%"></span></div>
+              <p class="t-small muted" data-reason>{{ b.moment }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <p class="t-small muted">Cada mes repites el test en 2 minutos y ajustamos las cantidades. Si cambia tu ritmo, cambia tu caja.</p>
+      </div>
+      <aside class="result__box" aria-label="Para empezar">
+        <div class="result__photo"><img src="{{ base }}assets/img/caja-abierta.webp" alt="Caja abierta con los tres blends" width="1200" height="1490" loading="lazy"></div>
+        {{ m.title_group('Para empezar', 'Caja Degustación · 19 €', 'h2', 't-card-title', 'inverse') }}
+        <p class="t-body">3 minis de 50 g con tus tres blends y una tarjeta con tu ritual del día. Envío incluido, sin permanencia.</p>
+        <a class="btn btn--light btn--block" href="{{ base }}suscripcion/#planes">Pide tu Caja Degustación →</a>
+        <p class="t-small">O <a class="link-underline" href="{{ base }}suscripcion/#planes">suscríbete</a>: Caja Ritual 36 €/mes ajustada con este test.</p>
+      </aside>
+    </div>
+    <div class="result__actions">
+      <button class="btn btn--outline" type="button" data-quiz-restart>↺ Repetir el test</button>
+      <a class="btn btn--outline" href="{{ base }}#blends">Ver los tres blends</a>
+    </div>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ base }}assets/js/test.js" defer></script>{% endblock %}

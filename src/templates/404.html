@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container not-found">
+  <p class="t-eyebrow muted">Error 404</p>
+  <h1 class="t-h1-page">Esta taza está vacía</h1>
+  <p class="t-lead">La página que buscas no existe o ha cambiado de sitio.</p>
+  <div class="page-hero__ctas">
+    <a class="btn btn--solid" href="{{ base }}">Volver al inicio</a>
+    <a class="btn btn--outline" href="{{ base }}test/">Haz el test · 2 min</a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test de bienestar · Sentio Brew</title>
+  <meta name="description" content="Ocho preguntas sobre tu día para ajustar tu caja de Focus, Euphoria y Serenity. 2 minutos, sin registro ni datos biométricos.">
+  <meta name="theme-color" content="#f4f3f0">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Test de bienestar">
+  <meta property="og:description" content="Ocho preguntas sobre tu día para ajustar tu caja de Focus, Euphoria y Serenity. 2 minutos, sin registro ni datos biométricos.">
+  <meta property="og:image" content="../assets/img/hero-caja.webp">
+  <meta property="og:locale" content="es_ES">
+  <link rel="icon" href="../assets/img/logo-mark.webp" type="image/webp">
+  <link rel="preload" href="../assets/fonts/archivo-black-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="../" aria-label="Sentio Brew, inicio">SENTIO <img src="../assets/img/logo-mark.webp" alt="" width="14" height="14"> BREW</a>
+      <nav class="site-nav" aria-label="Principal">
+        <ul>
+          <li><a href="../#blends">Blends</a></li>
+          <li><a href="../ingredientes/">Ingredientes</a></li>
+          <li><a href="../suscripcion/">Suscripción</a></li>
+          <li><a href="../pack-regalo/">Pack Regalo</a></li>
+          <li><a href="../blog/">Blog</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú" hidden>
+    <div class="mobile-menu__top">
+      <a class="logo" href="../">SENTIO <img src="../assets/img/logo-mark.webp" alt="" width="14" height="14"> BREW</a>
+      <button class="mobile-menu__close" type="button" aria-label="Cerrar menú">×</button>
+    </div>
+    <nav aria-label="Principal móvil">
+      <ul>
+        <li><a href="../#blends">Blends</a></li>
+        <li><a href="../ingredientes/">Ingredientes</a></li>
+        <li><a href="../suscripcion/">Suscripción</a></li>
+        <li><a href="../pack-regalo/">Pack Regalo</a></li>
+        <li><a href="../blog/">Blog</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--solid btn--block" href="../test/">Haz el test</a>
+    <p>2 minutos · te recomendamos tus blends según cómo estás.</p>
+  </div>
+
+  <main id="main">
+<div data-quiz>
+  <!-- Intro -->
+  <section class="test-intro" data-step="intro" aria-labelledby="test-title">
+    <div class="container test-intro__grid">
+      <div class="stack" style="gap:32px">
+        <div class="title-group">
+<p class="t-eyebrow muted">Test de bienestar</p>  <h1 class="t-h1-page" id="test-title">¿Cómo quieres sentirte hoy?</h1>
+</div>
+        <p class="t-lead">Ocho preguntas sobre tu día: cuándo empiezas, cuándo te cuesta concentrarte y cómo desconectas. Con tus respuestas ajustamos los tres blends de tu caja.</p>
+        <ul class="pill-row" role="list"><li class="pill">2 minutos</li><li class="pill">8 preguntas</li><li class="pill">Sin datos biométricos</li></ul>
+        <div class="form-actions" style="gap:16px">
+          <button class="btn btn--solid" type="button" data-quiz-start>Empezar el test →</button>
+          <p class="t-small muted">Sin registro. Al final eliges si quieres la caja.</p>
+        </div>
+      </div>
+      <div class="trio">
+        <span class="aura aura--focus" style="left:2%;top:20%"></span>
+        <span class="aura aura--euphoria" style="left:30%;bottom:8%"></span>
+        <span class="aura aura--serenity" style="right:2%;top:30%"></span>
+        <img src="../assets/img/pouch-focus.webp" alt="Focus" width="800" height="1256">
+        <img src="../assets/img/pouch-euphoria.webp" alt="Euphoria" width="800" height="1256">
+        <img src="../assets/img/pouch-serenity.webp" alt="Serenity" width="800" height="1256">
+      </div>
+    </div>
+  </section>
+
+  <!-- Preguntas -->
+  <form class="quiz" data-quiz-form hidden novalidate>
+    <div class="container">
+      <div class="quiz__col" data-step="q1" hidden>
+        <div class="progress">
+          <div class="progress__row"><p class="t-eyebrow muted">Pregunta 1 de 8</p><p class="t-small muted">≈ 2 min</p></div>
+          <div class="progress__bar" aria-hidden="true"><span class="is-done"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="stack" style="gap:16px">
+          <div class="title-group">
+<p class="t-eyebrow muted">Ritmo</p>  <h2 class="t-h2">¿A qué hora empieza tu día?</h2>
+</div>
+          <p class="t-body muted">Piensa en un día normal entre semana.</p>
+        </div>
+        <fieldset class="options">
+          <legend class="visually-hidden">¿A qué hora empieza tu día?</legend>
+          <label class="option">
+            <input type="radio" name="q1" value="0" data-score='{"focus": 1}'>
+            <span class="option__text"><span class="t-strong">Antes de las 7:00</span><span class="t-small muted">Madrugas: el día empieza con la casa en silencio.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="1" data-score='{"focus": 1}'>
+            <span class="option__text"><span class="t-strong">Entre las 7:00 y las 9:00</span><span class="t-small muted">El horario de casi todo el mundo.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="2" data-score='{"euphoria": 1}'>
+            <span class="option__text"><span class="t-strong">Después de las 9:00</span><span class="t-small muted">Te organizas tú y empiezas más tarde.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="3" data-score='{"euphoria": 1, "serenity": 1}'>
+            <span class="option__text"><span class="t-strong">Depende del día</span><span class="t-small muted">Turnos, clases o semanas muy distintas.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+        </fieldset>
+        <div class="quiz__nav">
+          <button class="btn btn--outline" type="button" data-quiz-back>← Atrás</button>
+          <button class="btn btn--solid" type="button" data-quiz-next disabled>Siguiente →</button>
+        </div>
+      </div>
+      <div class="quiz__col" data-step="q2" hidden>
+        <div class="progress">
+          <div class="progress__row"><p class="t-eyebrow muted">Pregunta 2 de 8</p><p class="t-small muted">≈ 1,5 min</p></div>
+          <div class="progress__bar" aria-hidden="true"><span class="is-done"></span><span class="is-done"></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="stack" style="gap:16px">
+          <div class="title-group">
+<p class="t-eyebrow muted">Pantallas</p>  <h2 class="t-h2">¿Cuántas horas pasas frente a una pantalla?</h2>
+</div>
+          <p class="t-body muted">Suma trabajo, estudio y tiempo libre.</p>
+        </div>
+        <fieldset class="options">
+          <legend class="visually-hidden">¿Cuántas horas pasas frente a una pantalla?</legend>
+          <label class="option">
+            <input type="radio" name="q2" value="0" data-score='{}'>
+            <span class="option__text"><span class="t-strong">Menos de 4 horas</span><span class="t-small muted">Tu día tiene bastante vida fuera de la pantalla.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="1" data-score='{"focus": 1}'>
+            <span class="option__text"><span class="t-strong">Entre 4 y 8 horas</span><span class="t-small muted">Una jornada de oficina o de clases.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="2" data-score='{"focus": 1, "serenity": 1}'>
+            <span class="option__text"><span class="t-strong">Entre 8 y 10 horas</span><span class="t-small muted">Trabajo en remoto y alguna serie por la noche.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="3" data-score='{"focus": 1, "serenity": 2}'>
+            <span class="option__text"><span class="t-strong">Más de 10 horas</span><span class="t-small muted">La pantalla es tu oficina, tu aula y tu sofá.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+        </fieldset>
+        <div class="quiz__nav">
+          <button class="btn btn--outline" type="button" data-quiz-back>← Atrás</button>
+          <button class="btn btn--solid" type="button" data-quiz-next disabled>Siguiente →</button>
+        </div>
+      </div>
+      <div class="quiz__col" data-step="q3" hidden>
+        <div class="progress">
+          <div class="progress__row"><p class="t-eyebrow muted">Pregunta 3 de 8</p><p class="t-small muted">≈ 1,3 min</p></div>
+          <div class="progress__bar" aria-hidden="true"><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="stack" style="gap:16px">
+          <div class="title-group">
+<p class="t-eyebrow muted">Concentración</p>  <h2 class="t-h2">¿Cuándo te cuesta más concentrarte?</h2>
+</div>
+          <p class="t-body muted">Elige el momento que más se parece a un día normal.</p>
+        </div>
+        <fieldset class="options">
+          <legend class="visually-hidden">¿Cuándo te cuesta más concentrarte?</legend>
+          <label class="option">
+            <input type="radio" name="q3" value="0" data-score='{"focus": 2}'>
+            <span class="option__text"><span class="t-strong">A primera hora</span><span class="t-small muted">Hasta las 10:00 me cuesta arrancar.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="1" data-score='{"focus": 1}'>
+            <span class="option__text"><span class="t-strong">A media mañana</span><span class="t-small muted">Entre reuniones y correos pierdo el hilo.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="2" data-score='{"euphoria": 2}'>
+            <span class="option__text"><span class="t-strong">Después de comer</span><span class="t-small muted">Entre las 14:00 y las 16:00, cuando todo pesa un poco más.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="3" data-score='{"serenity": 1}'>
+            <span class="option__text"><span class="t-strong">Por la noche</span><span class="t-small muted">Cuando estudio o trabajo hasta tarde.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+        </fieldset>
+        <div class="quiz__nav">
+          <button class="btn btn--outline" type="button" data-quiz-back>← Atrás</button>
+          <button class="btn btn--solid" type="button" data-quiz-next disabled>Siguiente →</button>
+        </div>
+      </div>
+      <div class="quiz__col" data-step="q4" hidden>
+        <div class="progress">
+          <div class="progress__row"><p class="t-eyebrow muted">Pregunta 4 de 8</p><p class="t-small muted">≈ 1 min</p></div>
+          <div class="progress__bar" aria-hidden="true"><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="stack" style="gap:16px">
+          <div class="title-group">
+<p class="t-eyebrow muted">Mediodía</p>  <h2 class="t-h2">¿Cómo es tu bajón de la tarde?</h2>
+</div>
+          <p class="t-body muted">Ese momento después de comer en que todo cuesta un poco más.</p>
+        </div>
+        <fieldset class="options">
+          <legend class="visually-hidden">¿Cómo es tu bajón de la tarde?</legend>
+          <label class="option">
+            <input type="radio" name="q4" value="0" data-score='{}'>
+            <span class="option__text"><span class="t-strong">No tengo bajón</span><span class="t-small muted">Llego a la tarde con la misma energía.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q4" value="1" data-score='{"euphoria": 1}'>
+            <span class="option__text"><span class="t-strong">Pequeño</span><span class="t-small muted">Un rato flojo que se pasa solo.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q4" value="2" data-score='{"euphoria": 2}'>
+            <span class="option__text"><span class="t-strong">Fuerte</span><span class="t-small muted">Necesito algo para seguir hasta el final del día.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q4" value="3" data-score='{"euphoria": 2, "serenity": 1}'>
+            <span class="option__text"><span class="t-strong">Lo tapo con otro café</span><span class="t-small muted">Y luego me cuesta dormir.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+        </fieldset>
+        <div class="quiz__nav">
+          <button class="btn btn--outline" type="button" data-quiz-back>← Atrás</button>
+          <button class="btn btn--solid" type="button" data-quiz-next disabled>Siguiente →</button>
+        </div>
+      </div>
+      <div class="quiz__col" data-step="q5" hidden>
+        <div class="progress">
+          <div class="progress__row"><p class="t-eyebrow muted">Pregunta 5 de 8</p><p class="t-small muted">≈ 45 s</p></div>
+          <div class="progress__bar" aria-hidden="true"><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="stack" style="gap:16px">
+          <div class="title-group">
+<p class="t-eyebrow muted">Cafeína</p>  <h2 class="t-h2">¿Cuántos cafés tomas al día?</h2>
+</div>
+          <p class="t-body muted">Cuenta también el té y las bebidas energéticas.</p>
+        </div>
+        <fieldset class="options">
+          <legend class="visually-hidden">¿Cuántos cafés tomas al día?</legend>
+          <label class="option">
+            <input type="radio" name="q5" value="0" data-score='{"serenity": 1}'>
+            <span class="option__text"><span class="t-strong">Ninguno</span><span class="t-small muted">Prefieres infusiones o nada.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q5" value="1" data-score='{"focus": 1}'>
+            <span class="option__text"><span class="t-strong">Uno</span><span class="t-small muted">El de la mañana y listo.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q5" value="2" data-score='{"euphoria": 1, "focus": 1}'>
+            <span class="option__text"><span class="t-strong">Dos o tres</span><span class="t-small muted">Uno para arrancar y otro para aguantar.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q5" value="3" data-score='{"euphoria": 1, "serenity": 1}'>
+            <span class="option__text"><span class="t-strong">Más de tres</span><span class="t-small muted">Uno detrás de otro, casi sin pensarlo.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+        </fieldset>
+        <div class="quiz__nav">
+          <button class="btn btn--outline" type="button" data-quiz-back>← Atrás</button>
+          <button class="btn btn--solid" type="button" data-quiz-next disabled>Siguiente →</button>
+        </div>
+      </div>
+      <div class="quiz__col" data-step="q6" hidden>
+        <div class="progress">
+          <div class="progress__row"><p class="t-eyebrow muted">Pregunta 6 de 8</p><p class="t-small muted">≈ 30 s</p></div>
+          <div class="progress__bar" aria-hidden="true"><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span></span><span></span></div>
+        </div>
+        <div class="stack" style="gap:16px">
+          <div class="title-group">
+<p class="t-eyebrow muted">Noche</p>  <h2 class="t-h2">¿Cómo desconectas por la noche?</h2>
+</div>
+          <p class="t-body muted">Piensa en la última hora antes de dormir.</p>
+        </div>
+        <fieldset class="options">
+          <legend class="visually-hidden">¿Cómo desconectas por la noche?</legend>
+          <label class="option">
+            <input type="radio" name="q6" value="0" data-score='{"serenity": 2}'>
+            <span class="option__text"><span class="t-strong">Me cuesta desconectar</span><span class="t-small muted">Sigo pensando en el trabajo o en las entregas.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q6" value="1" data-score='{"serenity": 2}'>
+            <span class="option__text"><span class="t-strong">Con el móvil en la mano</span><span class="t-small muted">Redes o series hasta que me entra el sueño.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q6" value="2" data-score='{"serenity": 1}'>
+            <span class="option__text"><span class="t-strong">Leo o escucho algo</span><span class="t-small muted">Ya tengo una rutina sin pantallas.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q6" value="3" data-score='{}'>
+            <span class="option__text"><span class="t-strong">Me duermo enseguida</span><span class="t-small muted">Desconectar no es mi problema.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+        </fieldset>
+        <div class="quiz__nav">
+          <button class="btn btn--outline" type="button" data-quiz-back>← Atrás</button>
+          <button class="btn btn--solid" type="button" data-quiz-next disabled>Siguiente →</button>
+        </div>
+      </div>
+      <div class="quiz__col" data-step="q7" hidden>
+        <div class="progress">
+          <div class="progress__row"><p class="t-eyebrow muted">Pregunta 7 de 8</p><p class="t-small muted">≈ 15 s</p></div>
+          <div class="progress__bar" aria-hidden="true"><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span></span></div>
+        </div>
+        <div class="stack" style="gap:16px">
+          <div class="title-group">
+<p class="t-eyebrow muted">Sabor</p>  <h2 class="t-h2">¿Qué te apetece más?</h2>
+</div>
+          <p class="t-body muted">Sin pensar en efectos: solo en lo que te gusta tomar.</p>
+        </div>
+        <fieldset class="options">
+          <legend class="visually-hidden">¿Qué te apetece más?</legend>
+          <label class="option">
+            <input type="radio" name="q7" value="0" data-score='{"focus": 2}'>
+            <span class="option__text"><span class="t-strong">Café</span><span class="t-small muted">Me gusta su sabor y su ritual.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q7" value="1" data-score='{"euphoria": 2}'>
+            <span class="option__text"><span class="t-strong">Mate</span><span class="t-small muted">Herbal, un punto amargo, para compartir.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q7" value="2" data-score='{"serenity": 2}'>
+            <span class="option__text"><span class="t-strong">Infusión</span><span class="t-small muted">Algo suave y caliente, sin cafeína.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q7" value="3" data-score='{}'>
+            <span class="option__text"><span class="t-strong">Un poco de todo</span><span class="t-small muted">Me gusta cambiar según el momento.</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+        </fieldset>
+        <div class="quiz__nav">
+          <button class="btn btn--outline" type="button" data-quiz-back>← Atrás</button>
+          <button class="btn btn--solid" type="button" data-quiz-next disabled>Siguiente →</button>
+        </div>
+      </div>
+
+      <div class="quiz__col" data-step="q8" hidden>
+        <div class="progress">
+          <div class="progress__row"><p class="t-eyebrow muted">Pregunta 8 de 8</p><p class="t-small muted">Última pregunta</p></div>
+          <div class="progress__bar" aria-hidden="true"><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span></div>
+        </div>
+        <div class="stack" style="gap:16px">
+          <div class="title-group">
+<p class="t-eyebrow muted">Antes de recomendarte</p>  <h2 class="t-h2">¿Hay algo que debamos tener en cuenta?</h2>
+</div>
+          <p class="t-body muted">Puedes marcar varias. Solo lo usamos para ajustar tu caja y no lo guardamos.</p>
+        </div>
+        <fieldset class="options">
+          <legend class="visually-hidden">¿Hay algo que debamos tener en cuenta?</legend>
+          <label class="option">
+            <input type="checkbox" name="q8" value="embarazo">
+            <span class="option__text"><span class="t-strong">Embarazo o lactancia</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="checkbox" name="q8" value="medicacion">
+            <span class="option__text"><span class="t-strong">Tomo medicación</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="checkbox" name="q8" value="cafeina">
+            <span class="option__text"><span class="t-strong">Soy sensible a la cafeína</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+          <label class="option">
+            <input type="checkbox" name="q8" value="nada">
+            <span class="option__text"><span class="t-strong">Nada de esto</span></span>
+            <span class="option__check" aria-hidden="true">✓</span>
+          </label>
+        </fieldset>
+        <div class="quiz__notice" data-quiz-notice hidden aria-live="polite">
+          <p class="t-strong" data-quiz-notice-title></p>
+          <p class="t-small muted">Focus y Euphoria llevan cafeína: te diremos que los tomes antes de las 14:00 y las 17:00. Serenity no lleva teína. Si marcas embarazo o medicación, no incluimos Serenity (ashwagandha y valeriana).</p>
+        </div>
+        <div class="quiz__nav">
+          <button class="btn btn--outline" type="button" data-quiz-back>← Atrás</button>
+          <button class="btn btn--solid" type="submit" data-quiz-next disabled>Ver mi resultado →</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Resultado -->
+  <section class="container result" data-step="result" hidden aria-labelledby="result-title" tabindex="-1">
+    <div class="result__head">
+      <div class="title-group">
+<p class="t-eyebrow muted">Tu resultado</p>  <h1 class="t-h1-page" id="result-title">Tu caja de noviembre</h1>
+</div>
+      <p class="t-lead" data-result-summary>Tu día pide más foco por la mañana y una pausa sin cafeína por la noche. Así reparte tu caja los tres blends.</p>
+    </div>
+    <div class="result__grid">
+      <div class="result__day">
+        <div>
+          <div class="result-row is-focus" data-result-row="focus">
+            <p class="t-time">08:00</p>
+            <div class="result-row__blend">
+              <p class="result-row__name"><span class="t-card-title">Focus</span> <span class="t-strong" data-grams>150 g</span></p>
+              <div class="meter" aria-hidden="true"><span data-meter style="width:50%"></span></div>
+              <p class="t-small muted" data-reason>Mañana · concentración</p>
+            </div>
+          </div>
+          <div class="result-row is-euphoria" data-result-row="euphoria">
+            <p class="t-time">13:00</p>
+            <div class="result-row__blend">
+              <p class="result-row__name"><span class="t-card-title">Euphoria</span> <span class="t-strong" data-grams>150 g</span></p>
+              <div class="meter" aria-hidden="true"><span data-meter style="width:50%"></span></div>
+              <p class="t-small muted" data-reason>Mediodía · energía</p>
+            </div>
+          </div>
+          <div class="result-row is-serenity" data-result-row="serenity">
+            <p class="t-time">21:00</p>
+            <div class="result-row__blend">
+              <p class="result-row__name"><span class="t-card-title">Serenity</span> <span class="t-strong" data-grams>150 g</span></p>
+              <div class="meter" aria-hidden="true"><span data-meter style="width:50%"></span></div>
+              <p class="t-small muted" data-reason>Noche · desconexión</p>
+            </div>
+          </div>
+        </div>
+        <p class="t-small muted">Cada mes repites el test en 2 minutos y ajustamos las cantidades. Si cambia tu ritmo, cambia tu caja.</p>
+      </div>
+      <aside class="result__box" aria-label="Para empezar">
+        <div class="result__photo"><img src="../assets/img/caja-abierta.webp" alt="Caja abierta con los tres blends" width="1200" height="1490" loading="lazy"></div>
+        <div class="title-group">
+<p class="t-eyebrow inverse">Para empezar</p>  <h2 class="t-card-title">Caja Degustación · 19 €</h2>
+</div>
+        <p class="t-body">3 minis de 50 g con tus tres blends y una tarjeta con tu ritual del día. Envío incluido, sin permanencia.</p>
+        <a class="btn btn--light btn--block" href="../suscripcion/#planes">Pide tu Caja Degustación →</a>
+        <p class="t-small">O <a class="link-underline" href="../suscripcion/#planes">suscríbete</a>: Caja Ritual 36 €/mes ajustada con este test.</p>
+      </aside>
+    </div>
+    <div class="result__actions">
+      <button class="btn btn--outline" type="button" data-quiz-restart>↺ Repetir el test</button>
+      <a class="btn btn--outline" href="../#blends">Ver los tres blends</a>
+    </div>
+  </section>
+</div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <a class="logo" href="../">SENTIO <img src="../assets/img/logo-mark.webp" alt="" width="14" height="14"> BREW</a>
+          <p>Un blend para cada momento del día. Café de especialidad e infusiones por suscripción.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h2>Tienda</h2>
+            <ul>
+<li><a href="../suscripcion/">Suscripción</a></li><li><a href="../suscripcion/#planes">Caja Degustación</a></li><li><a href="../pack-regalo/">Pack Regalo</a></li>            </ul>
+          </div>
+          <div>
+            <h2>Blends</h2>
+            <ul>
+<li><a href="../para-concentrarse/">Para concentrarse</a></li><li><a href="../energizantes/">Energizantes</a></li><li><a href="../para-dormir/">Para dormir</a></li><li><a href="../test/">Test de bienestar</a></li>            </ul>
+          </div>
+          <div>
+            <h2>Descubre</h2>
+            <ul>
+<li><a href="../ingredientes/">Ingredientes</a></li><li><a href="../nuestro-cafe/">Nuestro café</a></li><li><a href="../blog/">Blog</a></li>            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <div>
+          <p>© 2026 Sentio Brew · @sentiobrew</p>
+          <ul class="footer-legal" role="list">
+            <li><a href="../aviso-legal/">Aviso legal</a></li>
+            <li><a href="../privacidad/">Privacidad</a></li>
+            <li><a href="../cookies/">Cookies</a></li>
+            <li><button type="button" data-cookie-settings>Configurar cookies</button></li>
+          </ul>
+        </div>
+        <p class="site-footer__note">Proyecto académico · Máster en Diseño Web, UX/UI y Marketing Digital (CEI Valencia). Sentio Brew es una marca ficticia y sus productos no están a la venta, pero la investigación es real: datos de mercado, keywords y competencia.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookies: primera capa -->
+  <section class="cookie-banner" id="cookie-banner" aria-labelledby="cookie-title" hidden>
+    <div class="cookie-banner__text">
+      <h2 class="t-card-title" id="cookie-title">Tú decides sobre las cookies</h2>
+      <p class="t-body muted">Usamos cookies necesarias para que la web funcione y, solo si aceptas, cookies de analítica para saber qué páginas se leen. Más en la <a class="link-underline" href="../cookies/">Política de cookies</a>.</p>
+    </div>
+    <div class="cookie-banner__actions">
+      <div class="cookie-banner__btns" style="width:100%">
+        <button class="btn btn--outline" type="button" data-cookie="reject">Rechazar</button>
+        <button class="btn btn--outline" type="button" data-cookie="accept">Aceptar</button>
+      </div>
+      <button class="text-btn" type="button" data-cookie-settings>Configurar cookies</button>
+    </div>
+  </section>
+
+  <!-- Cookies: segunda capa -->
+  <div class="cookie-modal" id="cookie-modal" hidden>
+    <div class="cookie-modal__scrim" data-cookie-close></div>
+    <div class="cookie-modal__panel" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
+      <div class="cookie-modal__head">
+        <h2 class="t-card-title" id="cookie-modal-title">Preferencias de cookies</h2>
+        <button class="cookie-modal__close" type="button" data-cookie-close aria-label="Cerrar">×</button>
+      </div>
+      <p class="t-body muted">Elige qué cookies aceptas. Puedes cambiarlo cuando quieras desde «Configurar cookies», en el pie de página.</p>
+      <div class="cookie-cats">
+        <div class="cookie-cat">
+          <div><strong class="t-strong">Necesarias</strong><span class="t-body muted">Hacen que la web funcione y guardan tu elección.</span></div>
+          <span class="t-small muted">Siempre activas</span>
+        </div>
+        <div class="cookie-cat">
+          <div><label class="t-strong" for="cookie-analytics">Analítica</label><span class="t-body muted">Nos dicen qué páginas se leen, sin identificarte (Google Analytics).</span></div>
+          <span class="switch"><input type="checkbox" id="cookie-analytics" role="switch"><span></span></span>
+        </div>
+      </div>
+      <div class="stack" style="gap:8px">
+        <div class="cookie-modal__btns">
+          <button class="btn btn--outline" type="button" data-cookie="reject">Rechazar todas</button>
+          <button class="btn btn--outline" type="button" data-cookie="accept">Aceptar todas</button>
+        </div>
+        <button class="btn btn--solid btn--block" type="button" data-cookie="save">Guardar selección</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/main.js" defer></script>
+<script src="../assets/js/test.js" defer></script></body>
+</html>

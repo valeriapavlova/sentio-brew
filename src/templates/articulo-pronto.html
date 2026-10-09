@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block content %}
+<header class="container article-head">
+  {{ m.breadcrumb([('Inicio', ''), ('Blog', 'blog/'), (post.title, None)]) }}
+  {{ m.title_group(post.cat ~ ' · ' ~ post.date, post.title, 'h1', 't-h1-page', 'muted', 'page-title') }}
+</header>
+<div class="container">
+  <figure class="article-cover"><img src="{{ base }}assets/img/{{ post.img }}" alt="" width="1264" height="848" fetchpriority="high"></figure>
+</div>
+<div class="container longform">
+  <div></div>
+  <div class="prose">
+    <div class="note-box">
+      <p class="t-card-title">Artículo en preparación</p>
+      <p class="t-body">Este artículo forma parte del calendario editorial de noviembre y diciembre. Mientras tanto, puedes leer nuestro artículo sobre el té verde o descubrir qué blend encaja con tu día.</p>
+      <div class="page-hero__ctas">
+        <a class="btn btn--solid" href="{{ base }}blog/beneficios-te-verde/">Leer sobre el té verde →</a>
+        <a class="btn btn--outline" href="{{ base }}test/">Haz el test · 2 min</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

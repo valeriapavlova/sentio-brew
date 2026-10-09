@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block content %}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero__grid">
+    <div class="page-hero__text" style="gap:40px">
+      {{ m.breadcrumb([('Inicio', ''), ('Pack Regalo', None)]) }}
+      <div class="stack" style="gap:24px">
+        {{ m.title_group('Pack Regalo · Navidad', 'Regala tres meses de pausas', 'h1', 't-h1-page', 'muted', 'page-title') }}
+        <p class="t-lead">Tres Cajas Ritual, una al mes, con los tres blends y una tarjeta con tu dedicatoria. Quien lo recibe hace el test y la caja se ajusta a su ritmo.</p>
+        <p class="gift-price"><span class="t-price">99 €</span><span class="t-body muted">3 meses · envío incluido</span></p>
+        {{ m.pills(['Ahorras 9 €', 'Sin renovación automática', 'Pide antes del 18 de diciembre']) }}
+      </div>
+      <div class="page-hero__ctas">
+        <a class="btn btn--solid" href="#personaliza">Regalar el pack →</a>
+        <a class="btn btn--outline" href="#como-funciona">Cómo funciona</a>
+      </div>
+    </div>
+    <div class="gift-hero-media"><img src="{{ base }}assets/img/caja-cerrada.webp" alt="Caja cerrada de Sentio Brew lista para regalar" width="1000" height="1242" fetchpriority="high"></div>
+  </div>
+</section>
+
+<section class="section section--subtle" aria-labelledby="incl-title">
+  <div class="container">
+    <div class="section-head section-head--wide">
+      {{ m.title_group('Qué incluye', 'Una caja al mes, durante tres meses', 'h2', 't-h2', 'muted', 'incl-title') }}
+      <p class="t-body muted">Cada caja es una Caja Ritual completa: 450 g de los tres blends, repartidos según el test de quien la recibe.</p>
+    </div>
+    <div class="tiles tiles--3">
+      {% for mes, name, text, k in [('Mes 1','Diciembre','Llega con la tarjeta y tu dedicatoria. Dentro, el enlace al test.','focus'),('Mes 2','Enero','Ajustada con el test: más foco, más energía o más calma, según su ritmo.','euphoria'),('Mes 3','Febrero','La última caja del regalo. Si le gusta, puede seguir con su propia suscripción.','serenity')] %}
+      <article class="tile is-{{ k }}">
+        <div class="tile__content">
+          <div class="tile__fig"><p class="t-eyebrow muted">{{ mes }}</p><h3 class="t-h3">{{ name }}</h3></div>
+          <p class="t-body muted">{{ text }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    <p class="saving t-body"><span>3 × Caja Ritual 36 € = 108 €</span><span aria-hidden="true">→</span><strong>Pack Regalo 99 € · ahorras 9 €</strong></p>
+  </div>
+</section>
+
+<section class="section" id="como-funciona" aria-labelledby="how-title">
+  <div class="container stack" style="gap:48px">
+    {{ m.title_group('En 4 pasos', 'Cómo funciona el regalo', 'h2', 't-h2', 'muted', 'how-title') }}
+    <ol class="steps steps--row" role="list">
+      {{ m.step(1, 'Eliges la fecha', 'Primera caja antes de Navidad si pides hasta el 18 de diciembre.') }}
+      {{ m.step(2, 'Escribes tu dedicatoria', 'La imprimimos en la tarjeta del primer mes.') }}
+      {{ m.step(3, 'Hace su test', '2 minutos, sin datos biométricos. Si no lo hace, enviamos una caja equilibrada.') }}
+      {{ m.step(4, 'Tres cajas y fin', 'Sin renovación automática: no se cobra nada más.') }}
+    </ol>
+  </div>
+</section>
+
+<section class="section section--subtle" id="personaliza" aria-labelledby="pers-title">
+  <div class="container" style="margin-bottom:40px">{{ m.title_group('Tu dedicatoria', 'Personaliza la tarjeta', 'h2', 't-h2', 'muted', 'pers-title') }}</div>
+  <div class="container personalize">
+    <form class="stack" style="gap:40px" data-gift-form novalidate aria-labelledby="pers-title">
+      <div class="form-stack">
+        <div class="field"><label for="g-to">Para</label><input id="g-to" name="to" type="text" maxlength="40" value="Laura" autocomplete="off"></div>
+        <div class="field"><label for="g-from">De</label><input id="g-from" name="from" type="text" maxlength="40" value="Diego" autocomplete="off"></div>
+        <div class="field"><label for="g-msg">Mensaje (máx. 200 caracteres)</label><textarea id="g-msg" name="msg" maxlength="200">Para tus mañanas de entregas y tus noches de serie. Feliz Navidad.</textarea><small data-count aria-live="polite">66 / 200</small></div>
+        <div class="field"><label for="g-date">Fecha de la primera caja</label><input id="g-date" name="date" type="date" value="2026-12-20" min="2026-10-10"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn--solid" type="submit">Regalar el pack · 99 € →</button>
+        <p class="t-small muted">Proyecto académico: no se realiza ningún pago.</p>
+      </div>
+      <p class="form-note" data-gift-note hidden role="status">¡Listo! En una tienda real aquí pasarías al pago. Como es un proyecto académico, no se envía ni se guarda nada.</p>
+    </form>
+    <div class="preview-col">
+      <p class="t-eyebrow muted">Vista previa de la tarjeta</p>
+      <div class="gift-card">
+        <span class="aura"></span>
+        <span class="logo logo--inverse">SENTIO <img src="{{ base }}assets/img/logo-mark.webp" alt="" width="14" height="14"> BREW</span>
+        <div class="stack" style="gap:8px">
+          <p class="t-eyebrow">Para <span data-preview-to>Laura</span></p>
+          <blockquote>«<span data-preview-msg>Para tus mañanas de entregas y tus noches de serie. Feliz Navidad.</span>»</blockquote>
+          <p class="t-strong">— <span data-preview-from>Diego</span></p>
+        </div>
+        <p class="t-small">Tu primera caja: haz el test en sentiobrew.io/test</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-label="Preguntas frecuentes">
+  <div class="container">{{ m.faq('FAQ', 'Sobre el regalo', [
+    ('¿Hasta cuándo puedo pedirlo para Navidad?', 'Hasta el 18 de diciembre para que la primera caja llegue antes del 24. Después también puedes regalarlo, con entrega en enero.'),
+    ('¿Se renueva automáticamente?', 'No. Son tres cajas y se acaba: no se cobra nada más. Si a quien lo recibe le gusta, puede seguir con su propia suscripción.'),
+    ('¿Y si no hace el test?', 'Le enviamos una caja equilibrada, con los tres blends a partes iguales. Puede hacer el test en cualquier momento para ajustar las siguientes.'),
+    ('¿Puedo regalarlo a otra dirección?', 'Sí. Al pedirlo indicas la dirección de quien lo recibe; tú recibes la confirmación por email.')
+  ]) }}</div>
+</section>
+{% endblock %}

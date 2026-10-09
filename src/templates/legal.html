@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block content %}
+<header class="container article-head">
+  {{ m.breadcrumb([('Inicio', ''), ('Legal', None), (legal.crumb, None)]) }}
+  {{ m.title_group('Legal · Actualizado el 9 oct 2026', legal.h1, 'h1', 't-h1-page', 'muted', 'page-title') }}
+</header>
+<div class="container longform" style="padding-top:40px">
+  <aside class="toc">
+    <nav aria-label="En esta página" data-toc>
+      <p class="t-eyebrow muted">En esta página</p>
+      {% for s in legal.sections %}<a href="#s{{ loop.index }}">{{ s.short or s.h }}</a>{% endfor %}
+    </nav>
+    <div>
+      <p class="t-eyebrow muted">Otras páginas legales</p>
+      {% for label, href in legal.others %}<a href="{{ base }}{{ href }}">{{ label }}</a>{% endfor %}
+    </div>
+  </aside>
+  <article class="prose">
+    <p class="t-lead">{{ legal.lead|safe }}</p>
+    {% for s in legal.sections %}
+    <section id="s{{ loop.index }}">
+      <h2 class="t-h3">{{ s.h }}</h2>
+      {% for b in s.blocks %}
+        {% if b is string %}<p class="t-body">{{ b|safe }}</p>
+        {% elif 'list' in b %}<ul class="list t-body">{% for li in b.list %}<li>{{ li|safe }}</li>{% endfor %}</ul>
+        {% elif 'table' in b %}
+        <table class="legal-table">
+          <thead><tr>{% for c in b.table.cols %}<th scope="col">{{ c }}</th>{% endfor %}</tr></thead>
+          <tbody>{% for r in b.table.rows %}<tr>{% for c in r %}<td data-label="{{ b.table.cols[loop.index0] }}">{{ c }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+        </table>
+        {% elif 'button' in b %}<p><button class="btn btn--outline" type="button" data-cookie-settings>{{ b.button }}</button></p>
+        {% endif %}
+      {% endfor %}
+    </section>
+    {% endfor %}
+    <section class="toc--mobile" aria-label="Otras páginas legales">
+      <h2 class="t-h3">Otras páginas legales</h2>
+      {% for label, href in legal.others %}<p class="t-body"><a href="{{ base }}{{ href }}">{{ label }}</a></p>{% endfor %}
+    </section>
+  </article>
+</div>
+{% endblock %}

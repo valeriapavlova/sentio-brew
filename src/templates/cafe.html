@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block content %}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero__grid">
+    <div class="page-hero__text">
+      {{ m.breadcrumb([('Inicio', ''), ('Nuestro café', None)]) }}
+      {{ m.title_group('Nuestro café', 'Café de especialidad, de la finca a tu taza', 'h1', 't-h1-page', 'muted', 'page-title') }}
+      <p class="t-lead">El café de Focus es 100 % arábica de especialidad, tostado para filtro por tostadores de especialidad. Aquí te contamos qué significa eso y cómo lo elegimos.</p>
+      {{ m.pills(['100 % arábica', '80+ puntos SCA', 'Molido para filtro']) }}
+      <div class="page-hero__ctas">
+        <a class="btn btn--solid" href="{{ base }}para-concentrarse/">Ver Focus →</a>
+        <a class="btn btn--outline" href="{{ base }}test/">Haz el test · 2 min</a>
+      </div>
+    </div>
+    <div class="page-hero__media page-hero__media--photo"><img src="{{ base }}assets/img/nuestro-cafe.webp" alt="Granos de café tostados y verdes junto a una cuchara de cerámica" width="1264" height="848" fetchpriority="high"></div>
+  </div>
+</section>
+
+<section class="section section--subtle is-focus" aria-labelledby="what-title">
+  <div class="container">
+    <div class="section-head section-head--wide">
+      {{ m.title_group('Qué significa', '¿Qué es el café de especialidad?', 'h2', 't-h2', 'muted', 'what-title') }}
+      <p class="t-body">Es el café que obtiene 80 puntos o más sobre 100 en una cata hecha con el protocolo de la <a class="link-underline" href="https://sca.coffee/" target="_blank" rel="noopener">Specialty Coffee Association (SCA)</a>. Detrás de esa nota hay tres cosas que se pueden comprobar:</p>
+    </div>
+    <div class="tiles tiles--3">
+      {% for fig, name, text, strip in [('80+','Puntos en cata','Sin defectos en el grano y con un perfil de sabor limpio, medido con el protocolo SCA.','#3b6cf6'),('1','Origen por lote','Se sabe de qué país, región y finca viene cada lote, y cómo se procesó.','#4da6ee'),('≤ 4','Semanas desde el tueste','El café pierde aroma con el tiempo; por eso indicamos la fecha de tueste.','#5fe0e6')] %}
+      <article class="tile" style="--strip: {{ strip }}">
+        <div class="tile__content"><div class="tile__fig"><p class="t-time">{{ fig }}</p><h3 class="t-card-title">{{ name }}</h3></div><p class="t-body muted">{{ text }}</p></div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="lote" aria-labelledby="choose-title">
+  <div class="container cafe-choose">
+    <div class="stack" style="gap:32px">
+      {{ m.title_group('Del grano a la bolsa', 'Cómo lo elegimos', 'h2', 't-h2', 'muted', 'choose-title') }}
+      <ol class="steps" role="list" style="padding-top:0">
+        {{ m.step(1, 'Lotes de 80+ puntos', 'Trabajamos con tostadores de especialidad que nos envían lotes ya catados.') }}
+        {{ m.step(2, 'Catamos para filtro', 'Elegimos perfiles suaves, con notas a cacao o frutos secos, que funcionan en V60 o prensa.') }}
+        {{ m.step(3, 'Tueste medio', 'Lo tuestan nuestros tostadores en España, pensando en filtro y no en espresso.') }}
+        {{ m.step(4, 'Mezcla y envasado', 'En Valencia añadimos un 5 % de melena de león y lo envasamos molido para filtro.') }}
+      </ol>
+    </div>
+    <article class="lot-card" aria-labelledby="lot-title">
+      <div class="label-card__head">
+        <div class="title-group" style="gap:4px"><p class="t-eyebrow muted">Ficha de lote</p><h3 class="t-h3" id="lot-title">01 · Focus</h3></div>
+        <span class="logo" aria-hidden="true">SENTIO <img src="{{ base }}assets/img/logo-mark.webp" alt="" width="14" height="14"> BREW</span>
+      </div>
+      <div class="label-card__rule"></div>
+      <dl>
+        {% for k, v in [('País y región','Colombia · Huila'),('Variedad','Caturra y Castillo'),('Proceso','Lavado'),('Altitud','1.600–1.800 m'),('Puntuación SCA','84'),('Notas de cata','Cacao, caramelo, naranja'),('Tueste','Medio · fecha en la bolsa')] %}
+        <div><dt class="t-body">{{ k }}</dt><dd class="t-body">{{ v }}</dd></div>
+        {% endfor %}
+      </dl>
+      <p class="t-small muted">Lote de ejemplo · proyecto académico. Cada bolsa real indicaría su lote.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section section--subtle" aria-labelledby="cup-title">
+  <div class="container cafe-cup">
+    <div class="stack" style="gap:32px;align-items:flex-start">
+      {{ m.title_group('En tu taza', 'Cómo prepararlo', 'h2', 't-h2', 'muted', 'cup-title') }}
+      <p class="t-body">Lo molemos para filtro: funciona en V60, Chemex o prensa francesa. En cafetera italiana también, aunque la molienda queda algo gruesa.</p>
+      <div class="mini-tiles mini-tiles--surface">
+        {% for v, l in [('15 g','por taza'),('250 ml','agua'),('93 °C','temp.'),('4 min','filtro')] %}<div><strong class="t-post-title">{{ v }}</strong><span class="t-small muted">{{ l }}</span></div>{% endfor %}
+      </div>
+      <a class="btn btn--solid" href="{{ base }}para-concentrarse/#ritual">Tu ritual de las 08:00 →</a>
+    </div>
+    {{ m.blend_card(blends['focus']) }}
+  </div>
+</section>
+
+<section class="section" aria-label="Preguntas frecuentes">
+  <div class="container">{{ m.faq('FAQ', 'Sobre nuestro café', [
+    ('¿Lo vendéis en grano?', 'Por ahora solo molido para filtro, que es como mejor funciona en el ritual de Focus.'),
+    ('¿Por qué lleva melena de león?', 'Por su sabor suave y terroso, que redondea el café. Es un 5 % del blend y no añade cafeína. No hacemos promesas de salud.'),
+    ('¿Es café ecológico?', 'No todos los lotes tienen certificado ecológico. Elegimos por puntuación, origen y frescura, y lo indicamos en la ficha de cada lote.'),
+    ('¿Cuánta cafeína tiene una taza?', 'La de una taza de café de filtro: según el lote y la preparación, unos 80–100 mg por taza de 250 ml.')
+  ]) }}</div>
+</section>
+{% endblock %}

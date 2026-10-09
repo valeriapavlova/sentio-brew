@@ -1,0 +1,152 @@
+{# Componentes reutilizables · equivalen a los componentes de Figma (11 · Web · Components) #}
+
+{% macro breadcrumb(items) -%}
+<nav class="breadcrumb" aria-label="Migas de pan">
+  {%- for label, href in items -%}
+    {%- if not loop.first %}<span aria-hidden="true">/</span>{% endif -%}
+    {%- if href %}<a href="{{ base }}{{ href }}">{{ label }}</a>{% else %}<span aria-current="page">{{ label }}</span>{% endif -%}
+  {%- endfor -%}
+</nav>
+{%- endmacro %}
+
+{% macro title_group(eyebrow, title, tag='h2', cls='t-h2', eyebrow_cls='muted', id=None) -%}
+<div class="title-group">
+  {% if eyebrow %}<p class="t-eyebrow {{ eyebrow_cls }}">{{ eyebrow }}</p>{% endif %}
+  <{{ tag }} class="{{ cls }}"{% if id %} id="{{ id }}"{% endif %}>{{ title }}</{{ tag }}>
+</div>
+{%- endmacro %}
+
+{% macro pills(items) -%}
+<ul class="pill-row" role="list">{% for p in items %}<li class="pill">{{ p }}</li>{% endfor %}</ul>
+{%- endmacro %}
+
+{% macro blend_card(b, heading='h3') -%}
+<article class="blend-card is-{{ b.key }}">
+  <div class="blend-card__head">
+    <p class="t-time">{{ b.time }}</p>
+    <p class="t-caption muted">{{ b.moment }}</p>
+  </div>
+  <a class="blend-card__media" href="{{ base }}{{ b.url }}" tabindex="-1" aria-hidden="true">
+    <img src="{{ base }}assets/img/{{ b.img }}" alt="" width="400" height="628" loading="lazy">
+  </a>
+  <div class="blend-card__body">
+    <div class="stack" style="gap:16px">
+      <div class="blend-card__text">
+        <{{ heading }} class="t-h3">{{ b.name }}</{{ heading }}>
+        <p class="t-body">{{ b.tagline }}</p>
+      </div>
+      <div class="blend-card__meta">
+        <div class="bar" aria-hidden="true"></div>
+        <dl class="stack" style="gap:8px">
+          <div class="blend-card__row"><dt>Ingredientes</dt><dd>{{ b.ingredients }}</dd></div>
+          <div class="blend-card__row"><dt>Preparación</dt><dd>{{ b.prep }}</dd></div>
+        </dl>
+      </div>
+    </div>
+    <a class="t-strong" href="{{ base }}{{ b.url }}">Ver {{ b.name }} →</a>
+  </div>
+</article>
+{%- endmacro %}
+
+{% macro step(n, title, desc) -%}
+<li class="step">
+  <span class="step__num" aria-hidden="true">{{ n }}</span>
+  <div class="step__text"><strong class="t-strong">{{ title }}</strong><span class="t-small muted">{{ desc }}</span></div>
+</li>
+{%- endmacro %}
+
+{% macro test_preview(blends, order, active='focus') -%}
+<div class="test-preview" data-test-preview>
+  <h3 class="t-h3">¿Cómo quieres sentirte hoy?</h3>
+  <div class="chips" role="group" aria-label="Elige cómo quieres sentirte">
+    {% for k in order %}{% set b = blends[k] %}
+    <button class="chip chip--{{ k }}" type="button" aria-pressed="{{ 'true' if k == active else 'false' }}"
+      data-preview="{{ k }}" data-eyebrow="{{ b.time }} · {{ b.moment_short }}" data-name="{{ b.name }}" data-text="{{ b.preview }}" data-img="{{ base }}assets/img/{{ b.img }}">{{ b.chip }}</button>
+    {% endfor %}
+  </div>
+  {% set a = blends[active] %}
+  <div class="test-preview__result" aria-live="polite">
+    <div class="test-preview__thumb"><img src="{{ base }}assets/img/{{ a.img }}" alt="" width="62" height="97" data-preview-img loading="lazy"></div>
+    <div class="test-preview__text">
+      <p class="t-eyebrow muted" data-preview-eyebrow>{{ a.time }} · {{ a.moment_short }}</p>
+      <p class="t-card-title" data-preview-name>{{ a.name }}</p>
+      <p class="t-small muted" data-preview-text>{{ a.preview }}</p>
+    </div>
+  </div>
+  <a class="btn btn--solid" href="{{ base }}test/">Haz el test completo →</a>
+  <p class="t-caption muted">Vista previa del test. El resultado completo combina los tres blends.</p>
+</div>
+{%- endmacro %}
+
+{% macro plan_card(p, as_input=False, checked=False) -%}
+{% if as_input %}<label class="plan-card{% if p.featured %} plan-card--featured{% endif %}">
+  <input type="radio" name="plan" value="{{ p.key }}"{% if checked %} checked{% endif %}>
+{% else %}<article class="plan-card{% if p.featured %} plan-card--featured{% endif %}">{% endif %}
+  <span class="plan-card__tag t-eyebrow">{{ p.tag }}</span>
+  <h3 class="t-card-title">{{ p.title }}</h3>
+  <p class="plan-card__price"><span class="t-price">{{ p.price }}</span> <span class="t-body muted">{{ p.period }}</span></p>
+  <ul>{% for f in p.features %}<li class="t-body">· {{ f }}</li>{% endfor %}</ul>
+  <span class="plan-card__spacer"></span>
+  {% if as_input %}<span class="btn {{ 'btn--solid' if p.featured else 'btn--outline' }} btn--block" aria-hidden="true">{{ 'Elegir' if not checked else 'Elegida' }}</span>
+  {% else %}<a class="btn {{ 'btn--solid' if p.featured else 'btn--outline' }} btn--block" href="{{ base }}{{ p.href }}">{{ p.cta }}</a>{% endif %}
+{% if as_input %}</label>{% else %}</article>{% endif %}
+{%- endmacro %}
+
+{% macro post_card(p, heading='h3', lazy=True) -%}
+<article class="post-card" data-tone="{{ p.tone }}">
+  <div class="post-card__thumb"><img src="{{ base }}assets/img/{{ p.img }}" alt="" width="800" height="500"{% if lazy %} loading="lazy"{% endif %}></div>
+  <p class="post-card__meta"><span class="t-eyebrow">{{ p.cat }}</span> <span class="t-eyebrow muted">{{ p.date }}</span></p>
+  <{{ heading }} class="t-post-title"><a class="post-card__link" href="{{ base }}blog/{{ p.slug }}/">{{ p.title }}</a></{{ heading }}>
+  <p class="post-card__more">{{ 'Leer artículo →' if p.live else 'Próximamente →' }}</p>
+</article>
+{%- endmacro %}
+
+{% macro faq(eyebrow, title, items, extra=None) -%}
+<div class="faq">
+  <div class="faq__title">
+    {{ title_group(eyebrow, title) }}
+    {% if extra %}<p class="t-small muted">{{ extra[0] }}<a class="link-underline" href="{{ base }}{{ extra[2] }}">{{ extra[1] }}</a></p>{% endif %}
+  </div>
+  <div class="faq__list">
+    {% for q, a in items %}
+    <details{% if loop.first %} open{% endif %}>
+      <summary>{{ q }}</summary>
+      <p class="t-body">{{ a }}</p>
+    </details>
+    {% endfor %}
+  </div>
+</div>
+{%- endmacro %}
+
+{% macro ing_card(i, blend, show_chip=True) -%}
+<article class="ing-card is-{{ blend }}">
+  <div class="ing-card__body">
+    <div class="ing-card__name">
+      <p class="t-small muted latin">{{ i.latin }}</p>
+      <h3 class="t-card-title">{{ i.name }}</h3>
+    </div>
+    <p class="t-body muted">{{ i.desc }}</p>
+  </div>
+  <div class="ing-card__foot">
+    {% if show_chip %}<span class="chip chip--{{ blend }}">{{ blend|capitalize }}</span>{% endif %}
+    {% if i.link %}<a class="t-strong" href="{{ base }}{{ i.link[1] }}">{{ i.link[0] }}</a>{% else %}<span class="soon">Ficha próximamente</span>{% endif %}
+  </div>
+</article>
+{%- endmacro %}
+
+{% macro cta_test(blends, order, eyebrow, active='focus') -%}
+<section class="cta-wrap" aria-labelledby="cta-test-title">
+  <div class="container">
+    <div class="cta-band">
+      <span class="aura aura--{{ active }}" style="width:360px;height:300px;left:-80px;bottom:-120px"></span>
+      <span class="aura aura--euphoria" style="width:300px;height:260px;left:30%;top:-140px"></span>
+      <span class="aura aura--{{ active }}" style="width:300px;height:260px;right:-60px;bottom:-140px"></span>
+      <div class="cta-band__text">
+        {{ title_group(eyebrow, 'Haz el test y te lo decimos', 'h2', 't-h2', 'inverse', 'cta-test-title') }}
+        <p class="t-lead inverse">2 minutos, sin dispositivos ni datos biométricos. Te recomendamos la combinación de blends que encaja con tu día.</p>
+      </div>
+      {{ test_preview(blends, order, active) }}
+    </div>
+  </div>
+</section>
+{%- endmacro %}

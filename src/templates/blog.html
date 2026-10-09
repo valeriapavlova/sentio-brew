@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block content %}
+{% set featured = posts[0] %}
+<section class="page-hero--simple" aria-labelledby="page-title">
+  <div class="container">
+    {{ m.breadcrumb([('Inicio', ''), ('Blog', None)]) }}
+    <div class="page-hero__head">
+      {{ m.title_group('Blog', 'Lo que hay detrás de cada taza', 'h1', 't-h1-page', 'muted', 'page-title') }}
+      <p class="t-lead">Café, infusiones y rutinas para días con muchas pantallas. Sin promesas milagro: con fuentes y a la medida de tu día.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filtrar artículos por momento" data-filter-group="posts">
+      <button class="chip chip--plain" type="button" aria-pressed="true" data-filter="all">Todos</button>
+      <button class="chip chip--focus" type="button" aria-pressed="false" data-filter="focus">Mañana</button>
+      <button class="chip chip--euphoria" type="button" aria-pressed="false" data-filter="euphoria">Mediodía</button>
+      <button class="chip chip--serenity" type="button" aria-pressed="false" data-filter="serenity">Noche</button>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Artículo destacado" style="padding-bottom:80px">
+  <div class="container">
+    <article class="featured-post post-card" data-tone="{{ featured.tone }}">
+      <div class="featured-post__img"><img src="{{ base }}assets/img/{{ featured.img }}" alt="" width="1264" height="848"></div>
+      <div class="featured-post__text">
+        <p class="post-card__meta"><span class="t-eyebrow">Destacado</span><span class="t-eyebrow muted">Mediodía · 5 min</span></p>
+        <div class="stack" style="gap:16px">
+          <h2 class="t-h3"><a class="post-card__link" href="{{ base }}blog/{{ featured.slug }}/">{{ featured.title }}</a></h2>
+          <p class="t-body muted">Qué lleva una taza, cuánta cafeína tiene y cómo prepararlo para que no amargue. Con fuentes, sin promesas.</p>
+        </div>
+        <span class="btn btn--outline" aria-hidden="true">Leer artículo →</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section aria-labelledby="all-title" style="padding-bottom:120px">
+  <div class="container stack" style="gap:32px">
+    {{ m.title_group('Calendario nov–dic', 'Todos los artículos', 'h2', 't-h2', 'muted', 'all-title') }}
+    <div class="post-grid" data-filter-target="posts">
+      {% for p in posts[1:] %}{{ m.post_card(p) }}{% endfor %}
+    </div>
+    <p class="t-body muted" data-filter-empty hidden>No hay artículos de este momento todavía.</p>
+  </div>
+</section>
+
+<section aria-labelledby="news-title" style="padding-bottom:120px">
+  <div class="container">
+    <div class="newsletter">
+      <div class="title-group">
+        <p class="t-eyebrow">Newsletter</p>
+        <h2 class="t-h3" id="news-title">Un artículo al mes, sin spam</h2>
+        <p class="t-body">Lo nuevo del blog y el recordatorio de tu test. Te das de baja con un clic.</p>
+      </div>
+      <form data-newsletter novalidate>
+        <label class="visually-hidden" for="nl-email">Tu email</label>
+        <input id="nl-email" type="email" name="email" placeholder="tu@email.com" autocomplete="email" required>
+        <button class="btn btn--light" type="submit">Suscribirme</button>
+        <p class="form-note" data-newsletter-note hidden role="status">Gracias. Es un proyecto académico: no guardamos tu email.</p>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

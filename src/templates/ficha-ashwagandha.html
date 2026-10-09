@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block content %}
+<section class="page-hero" style="padding-bottom:80px" aria-labelledby="page-title">
+  <div class="container page-hero__grid">
+    <div class="page-hero__text">
+      {{ m.breadcrumb([('Inicio', ''), ('Ingredientes', 'ingredientes/'), ('Ashwagandha', None)]) }}
+      {{ m.title_group('Ficha de ingrediente', 'Ashwagandha: qué es, propiedades y cómo tomarla', 'h1', 't-h1-page', 'muted', 'page-title') }}
+      <p class="t-lead">Qué es la ashwagandha, sus propiedades, contraindicaciones y cómo tomarla en infusión. Descubre los blends de Sentio Brew que la contienen.</p>
+      {{ m.pills(['Withania somnifera', 'Raíz', 'En Serenity · 10 %']) }}
+    </div>
+    <div class="page-hero__media" style="aspect-ratio:600/480"><img class="media-cover" src="{{ base }}assets/img/ingrediente-ashwagandha.webp" alt="Raíz de ashwagandha en polvo y troceada" width="1264" height="848" fetchpriority="high"></div>
+  </div>
+</section>
+
+<div class="container longform" style="padding-top:40px">
+  <aside class="toc">
+    <nav aria-label="En esta ficha" data-toc>
+      <p class="t-eyebrow muted">En esta ficha</p>
+      <a href="#que-es">Qué es la ashwagandha</a>
+      <a href="#propiedades">Propiedades que se le atribuyen</a>
+      <a href="#contraindicaciones">Contraindicaciones</a>
+      <a href="#como-tomarla">Cómo tomarla</a>
+      <a href="#en-sentio">En Sentio Brew</a>
+      <a href="#faq">Preguntas frecuentes</a>
+    </nav>
+  </aside>
+  <article class="prose" style="gap:56px">
+    <section id="que-es" style="gap:24px">
+      <h2 class="t-h3">Qué es la ashwagandha</h2>
+      <div class="sub"><h3 class="t-post-title">Origen y uso tradicional en la medicina ayurvédica</h3><p class="t-body">Esta planta (Withania somnifera) es una planta de uso tradicional en la medicina ayurvédica, originaria de India y el norte de África.</p></div>
+      <div class="sub"><h3 class="t-post-title">Por qué se considera una planta adaptógena</h3><p class="t-body">En la tradición ayurvédica se usa para acompañar al cuerpo en momentos de mayor exigencia física o mental.</p></div>
+    </section>
+    <section id="propiedades" style="gap:24px">
+      <h2 class="t-h3">Propiedades y beneficios que se atribuyen a la ashwagandha</h2>
+      <div class="sub"><h3 class="t-post-title">Ashwagandha para dormir: ¿da sueño?</h3><p class="t-body">En la medicina tradicional se le atribuye un efecto calmante que puede favorecer la relajación antes de dormir, aunque el efecto varía de una persona a otra.</p></div>
+      <div class="sub"><h3 class="t-post-title">Una planta para el estrés del día a día</h3><p class="t-body">Se usa tradicionalmente como apoyo frente al desgaste del estrés cotidiano, sin sustituir otros hábitos de descanso ni ningún tratamiento médico.</p></div>
+    </section>
+    <section id="contraindicaciones" style="gap:24px">
+      <h2 class="t-h3">Contraindicaciones de la ashwagandha</h2>
+      <div class="note-box">
+        <div class="sub"><h3 class="t-post-title">Quién no debería tomarla</h3><p class="t-body">No se recomienda durante el embarazo o la lactancia, ni en personas con enfermedades autoinmunes o de tiroides, o que tomen medicación para el sueño o la ansiedad, sin consultarlo antes con un profesional de la salud.</p></div>
+        <div class="sub"><h3 class="t-post-title">Posibles efectos secundarios</h3><p class="t-body">Puede producir molestias digestivas leves en algunas personas.</p></div>
+      </div>
+    </section>
+    <section id="como-tomarla" style="gap:24px">
+      <h2 class="t-h3">Cómo tomarla</h2>
+      <div class="sub"><h3 class="t-post-title">Ashwagandha en polvo, en cápsulas o en infusión</h3><p class="t-body">Las formas más habituales son en polvo (para mezclar con leche o bebidas vegetales), en cápsulas, o en infusión combinada con otras plantas.</p></div>
+      <div class="sub"><h3 class="t-post-title">¿Por qué se toma con pimienta negra?</h3><p class="t-body">La pimienta negra se usa tradicionalmente junto a esta raíz porque se considera que favorece su absorción.</p></div>
+    </section>
+    <section id="en-sentio" style="gap:24px">
+      <h2 class="t-h3">Blends de Sentio Brew con ashwagandha</h2>
+      <p class="t-body">La incorporamos en nuestros blends para la noche y relajantes, combinada con manzanilla y rooibos.</p>
+      {{ m.blend_card(blends['serenity']) }}
+      <a class="btn btn--solid" style="align-self:flex-start" href="{{ base }}para-dormir/">Ver blends para dormir →</a>
+    </section>
+    <section id="faq" style="gap:24px">
+      <h2 class="t-h3">Preguntas frecuentes</h2>
+      <div class="faq-inline">
+        <div><h3 class="t-post-title">¿La ashwagandha da sueño?</h3><p class="t-body">Tradicionalmente se le atribuye un efecto calmante, que puede favorecer la relajación, pero no es un sedante y su efecto varía según la persona.</p></div>
+        <div><h3 class="t-post-title">¿Dónde comprarla de calidad?</h3><p class="t-body">Busca un proveedor que indique el nombre científico (Withania somnifera), la parte de la planta (raíz) y el origen. En Sentio Brew la encontrarás dentro de Serenity, en un 10 %.</p></div>
+        <div><h3 class="t-post-title">¿Dónde puedo encontrar más información?</h3><p class="t-body">En la <a href="https://www.nccih.nih.gov/health/ashwagandha" target="_blank" rel="noopener">ficha del NCCIH sobre la ashwagandha</a>, el centro de salud complementaria de los Institutos Nacionales de Salud de EE. UU.</p></div>
+      </div>
+    </section>
+    {{ m.pills(['adaptógenos', 'noche', 'Serenity']) }}
+  </article>
+</div>
+
+<section class="related" aria-labelledby="rel-title">
+  <div class="container stack" style="gap:32px">
+    {{ m.title_group('También en Serenity', 'Otros ingredientes', 'h2', 't-h2', 'muted', 'rel-title') }}
+    <div class="ing-grid ing-grid--3">
+      {% for i in ingredients['serenity'] if i.name != 'Ashwagandha' %}{{ m.ing_card(i, 'serenity', False) }}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

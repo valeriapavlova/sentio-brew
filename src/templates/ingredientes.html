@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% import "macros.html" as m with context %}
+{% block content %}
+<section class="page-hero--simple" aria-labelledby="page-title">
+  <div class="container">
+    {{ m.breadcrumb([('Inicio', ''), ('Ingredientes', None)]) }}
+    <div class="page-hero__head">
+      {{ m.title_group('Ingredientes', 'Qué hay en cada taza', 'h1', 't-h1-page', 'muted', 'page-title') }}
+      <p class="t-lead">Las plantas, hojas y raíces de nuestros blends, y otras que usamos en el blog. Para cada una: qué es, cómo se toma y sus precauciones. Sin promesas de salud.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filtrar ingredientes" data-filter-group="ing">
+      <button class="chip chip--plain" type="button" aria-pressed="true" data-filter="all">Todos</button>
+      <button class="chip chip--focus" type="button" aria-pressed="false" data-filter="focus">Focus</button>
+      <button class="chip chip--euphoria" type="button" aria-pressed="false" data-filter="euphoria">Euphoria</button>
+      <button class="chip chip--serenity" type="button" aria-pressed="false" data-filter="serenity">Serenity</button>
+      <button class="chip chip--plain" type="button" aria-pressed="false" data-filter="otros">Otros ingredientes</button>
+    </div>
+  </div>
+</section>
+
+<div data-filter-target="ing">
+  <section class="container ing-groups" style="padding-bottom:80px" data-tone-wrap>
+    {% for k, title in [('focus', 'Mañana · Focus'), ('euphoria', 'Mediodía · Euphoria')] %}
+    <div class="ing-group" data-tone="{{ k }}">
+      {{ m.title_group('En nuestros blends', title, 'h2', 't-h3') }}
+      <div class="ing-grid">{% for i in ingredients[k] %}{{ m.ing_card(i, k) }}{% endfor %}</div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="container ing-group" style="padding-bottom:80px" data-tone="serenity">
+    {{ m.title_group('En nuestros blends', 'Noche · Serenity', 'h2', 't-h3') }}
+    <div class="ing-grid ing-grid--4">{% for i in ingredients['serenity'] %}{{ m.ing_card(i, 'serenity') }}{% endfor %}</div>
+  </section>
+
+  <section class="section section--subtle" style="padding-top:80px" data-tone="otros" aria-labelledby="others-title">
+    <div class="container others">
+      <div class="stack" style="gap:16px">
+        {{ m.title_group('Fuera de los blends', 'Otros ingredientes', 'h2', 't-h2', 'muted', 'others-title') }}
+        <p class="t-body muted">Fichas de plantas que aparecen en el blog y en el test. No están en nuestras cajas. Las iremos publicando poco a poco.</p>
+      </div>
+      <ul class="pill-row" role="list" style="align-content:flex-start">
+        {% set olinks = {'Té verde': 'blog/beneficios-te-verde/', 'Matcha': 'blog/como-preparar-matcha/'} %}
+        {% for o in others %}<li>{% if o in olinks %}<a class="pill" href="{{ base }}{{ olinks[o] }}">{{ o }} →</a>{% else %}<span class="pill">{{ o }}</span>{% endif %}</li>{% endfor %}
+      </ul>
+    </div>
+  </section>
+</div>
+{% endblock %}
